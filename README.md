@@ -66,5 +66,6 @@ https://www.youtube.com/watch?v=7bA0gTroJjw
 ---
 
 ## Sources:
-https://phoenixnap.com/kb/how-to-install-kubernetes-on-a-bare-metal-server
-https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/
+
+- https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/
+- https://phoenixnap.com/kb/how-to-install-kubernetes-on-a-bare-metal-server
