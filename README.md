@@ -5,6 +5,11 @@ Terraform & Docker and that the tools are installed on your machine.
 
 ## USAGE:
 
+### Disable your system swap:
+```sh
+swapoff -a
+```
+
 ### Start the infrastructure with:
 ```sh
 terraform apply
@@ -27,12 +32,22 @@ kubeadm token create --print-join-command
 kubeadm --ignore-preflight-errors=all join <IP>:6443 --token <TOKEN> --discovery-token-ca-cert-hash sha256:<CA-HASH>
 ```
 
+> Notice the usage of `--ignore-preflight-errors=all` in the previous command
+
+
 ### Copy the configuration from the master node:
 `/etc/kubernetes/admin.conf`
 ### To your personal computer:
 `$HOME/.kube/config`
 
 > make sure your user has the correct acl rights to access the file
+
+<br>
+
+### Add pod network add-on:
+```sh
+kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+```
 
 ### Then on your personal computer enter:
 ```sh
@@ -52,3 +67,4 @@ https://www.youtube.com/watch?v=7bA0gTroJjw
 
 ## Sources:
 https://phoenixnap.com/kb/how-to-install-kubernetes-on-a-bare-metal-server
+https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/
