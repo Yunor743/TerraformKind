@@ -15,9 +15,15 @@ swapoff -a
 terraform apply
 ```
 
+### On each k8s_node enter the following command:
+```
+mkdir -p /run/flannel && cp /root/subnet.env /run/flannel/
+```
+> If one of your nodes reboot you have to re-enter this command
+
 ### On master init control-plane with:
 ```sh
-kubeadm init --ignore-preflight-errors=all
+kubeadm init --ignore-preflight-errors=all --pod-network-cidr=10.244.0.0/16
 ```
 
 ### If you lose the previous token you can create another with:
@@ -25,7 +31,7 @@ kubeadm init --ignore-preflight-errors=all
 kubeadm token create --print-join-command
 ```
 
-### Join them to the cluster:
+### Join workers to the cluster:
 > Previous steps gives you the command to enter on each worker node.
 
 ```sh
@@ -44,15 +50,18 @@ kubeadm --ignore-preflight-errors=all join <IP>:6443 --token <TOKEN> --discovery
 
 <br>
 
+### _Then on your personal computer_
+
 ### Add pod network add-on:
 ```sh
 kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
 ```
 
-### Then on your personal computer enter:
+### finally list connected nodes:
 ```sh
 kubectl get node
 ```
+> you may have to wait a few minutes until your nodes are ready
 
 ## You have a cluster composed of one master and two workers !
 

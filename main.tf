@@ -35,8 +35,8 @@ resource "docker_container" "kube-master" {
   hostname    = "kube-master"
   restart     = "unless-stopped"
   privileged  = true
-  memory      = 2000
-  memory_swap = 2000
+  memory      = 4000
+  memory_swap = 4000
   networks_advanced {
     name         = docker_network.kube_net.name
     ipv4_address = "192.168.0.1"
@@ -50,8 +50,8 @@ resource "docker_container" "kube-worker-1" {
   hostname    = "kube-worker-1"
   restart     = "unless-stopped"
   privileged  = true
-  memory      = 2000
-  memory_swap = 2000
+  memory      = 4000
+  memory_swap = 4000
   networks_advanced {
     name         = docker_network.kube_net.name
     ipv4_address = "192.168.0.2"
@@ -65,8 +65,8 @@ resource "docker_container" "kube-worker-2" {
   hostname    = "kube-worker-2"
   restart     = "unless-stopped"
   privileged  = true
-  memory      = 2000
-  memory_swap = 2000
+  memory      = 4000
+  memory_swap = 4000
   networks_advanced {
     name         = docker_network.kube_net.name
     ipv4_address = "192.168.0.3"
