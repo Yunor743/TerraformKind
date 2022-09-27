@@ -1,5 +1,8 @@
 #!/bin/sh
 
+# DOCKER_DEBVERSION=5:19.03.0~3-0~debian-buster
+K8S_DEBVERSION=1.19.16-00
+
 # install dependencies
 apt-get update &&
 apt-get install -y init systemd ufw apt-transport-https ca-certificates curl gnupg lsb-release software-properties-common &&
@@ -29,6 +32,7 @@ curl -fsSL https://download.docker.com/linux/debian/gpg | gpg --dearmor -o /usr/
 
 # add docker repo to apt
 echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/debian $(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null &&
+# echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/debian buster stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null &&
 
 apt-get update &&
 apt-get install -y docker-ce docker-ce-cli containerd.io &&
@@ -45,7 +49,8 @@ curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add &&
 apt-add-repository "deb http://apt.kubernetes.io/ kubernetes-xenial main" &&
 
 apt-get update &&
-apt-get install -y kubelet kubeadm kubectl &&
+# apt-get install -y kubelet kubeadm kubectl
+apt-get install -y kubelet=$K8S_DEBVERSION kubeadm=$K8S_DEBVERSION kubectl=$K8S_DEBVERSION
 apt-mark hold kubelet kubeadm kubectl &&
 
 # kubernetes installed !!

@@ -9,12 +9,12 @@ terraform {
 
 provider "docker" {}
 
-resource "docker_image" "k8s_node" {
-  name         = "k8s_node:latest"
+resource "docker_image" "k8snode" {
+  name         = "terraformkind-k8snode:latest"
   keep_locally = true
   build {
     path = "DockerImg"
-    tag  = ["k8s_node:latest"]
+    tag  = ["terraformkind-k8snode:latest"]
   }
 }
 
@@ -30,7 +30,7 @@ resource "docker_network" "kube_net" {
 
 resource "docker_container" "kube-master" {
   name        = "kube-master"
-  image       = docker_image.k8s_node.latest
+  image       = docker_image.k8snode.latest
   tty         = true
   hostname    = "kube-master"
   restart     = "unless-stopped"
@@ -45,7 +45,7 @@ resource "docker_container" "kube-master" {
 
 resource "docker_container" "kube-worker-1" {
   name        = "kube-worker-1"
-  image       = docker_image.k8s_node.latest
+  image       = docker_image.k8snode.latest
   tty         = true
   hostname    = "kube-worker-1"
   restart     = "unless-stopped"
@@ -60,7 +60,7 @@ resource "docker_container" "kube-worker-1" {
 
 resource "docker_container" "kube-worker-2" {
   name        = "kube-worker-2"
-  image       = docker_image.k8s_node.latest
+  image       = docker_image.k8snode.latest
   tty         = true
   hostname    = "kube-worker-2"
   restart     = "unless-stopped"

@@ -5,9 +5,21 @@ Terraform & Docker and that the tools are installed on your machine.
 
 ## USAGE:
 
-### Disable your system swap:
+### Disable your host system swap:
+> Recommended in the kubernetes doc
 ```sh
-swapoff -a
+sudo swapoff -a
+```
+
+### Build the docker image for node
+```
+cd DockerImg;
+docker build -t terraformkind-k8snode .
+```
+
+### Initialize the infrastructure
+```sh
+terraform init
 ```
 
 ### Start the infrastructure with:
@@ -15,7 +27,7 @@ swapoff -a
 terraform apply
 ```
 
-### On each k8s_node enter the following command:
+### On each terraformkind-k8snode container enter the following command:
 ```
 mkdir -p /run/flannel && cp /root/subnet.env /run/flannel/
 ```
