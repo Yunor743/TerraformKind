@@ -11,7 +11,7 @@ Terraform & Docker and that the tools are installed on your machine.
 sudo swapoff -a
 ```
 
-### Build the docker image for node
+### Build the docker image for node (optional)
 ```
 cd DockerImg;
 docker build -t terraformkind-k8snode .
